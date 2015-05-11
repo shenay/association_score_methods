@@ -31,8 +31,9 @@ over-write any previous assignment.
 
 In the end we obtain a file like this :
 gwas_snp_rs_id | assigned_ensembl_gene_id | sequence_ontology_term | overlapping_ensembl_gene_ids
+-------------- | ------------------------ | ---------------------- | ----------------------------
 rs227724 | ENSG00000183691|upstream_gene_variant|
-rs2488389|ENSG00000213047|intron_variant|
+rs2488389|ENSG00000213047|intron_variant| 
 rs7200543|ENSG00000275498|synonymous_variant | ENSG00000179889
 
 To obtain a score we associate the returned SO term with a number between 0 and 1 which reflect the severity of the effect
@@ -44,7 +45,7 @@ sure of it then in the previous example.
 
 Here are the different term and the score we associate to them :
 Term | Probability
------------- | -------------
+---- | -----------
 transcript_ablation	| 1
 splice_acceptor_variant	| 0.971428571
 splice_donor_variant	| 0.942857143
@@ -83,3 +84,4 @@ nearest_gene_five_prime_end | 0.028571429
 
 
 #Overall association_score method for an association
+The overall score is the product of the variant2gene score by the variant2disease score.
