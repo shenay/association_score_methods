@@ -1,5 +1,5 @@
 #Evidence.variant2disease.association_score
-The P value we get from the curated scientific publication for the given variant to disease association. 
+The P value we get from the curated scientific publication for the given variant to disease association.
 A P- value is a value representing the significance of the odds ratio (odds of disease for individuals having a specific
 allele and the odds of disease for individuals who do not have that same allele) is typically calculated using a simple
 chi-squared test. Finding odds ratios that are significantly different from 1 is the objective of the GWA study because
@@ -9,9 +9,9 @@ this shows that a SNP is associated with the disease.
 
 To assign variants to genes we use a pipeline built by Michael Maguire(mmaguire@ebi.ac.uk).
 For each of the variant RS ids the pipeline will get :
-    the REST API JSON output
-    the nearest gene output from the Ensembl Perl API
-    the online VEP output.
+* the REST API JSON output
+* the nearest gene output from the Ensembl Perl API
+* the online VEP output.
 Those outputs are loaded into a database.
 
 For non intergenic genes :
@@ -33,7 +33,7 @@ In the end we obtain a file like this :
 gwas_snp_rs_id | assigned_ensembl_gene_id | sequence_ontology_term | overlapping_ensembl_gene_ids
 -------------- | ------------------------ | ---------------------- | ----------------------------
 rs227724 | ENSG00000183691|upstream_gene_variant|
-rs2488389|ENSG00000213047|intron_variant| 
+rs2488389|ENSG00000213047|intron_variant|
 rs7200543|ENSG00000275498|synonymous_variant | ENSG00000179889
 
 To obtain a score we associate the returned SO term with a number between 0 and 1 which reflect the severity of the effect
@@ -81,7 +81,6 @@ feature_elongation | 0.114285714
 feature_truncation | 0.085714286
 intergenic_variant | 0.057142857
 nearest_gene_five_prime_end | 0.028571429
-
 
 #Overall association_score method for an association
 The overall score is the product of the variant2gene score by the variant2disease score.
