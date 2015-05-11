@@ -43,7 +43,7 @@ If the snp is in a coding region of a gene and brings a new stop codon it is lik
 If the gene is associated to a snp because it was the nearest gene to this snp, the association can still be right but we're less
 sure of it then in the previous example.
 
-Here are the different term and the score we associate to them :
+Here are the different term and the score we associate to them :  
 Term | Probability
 ---- | -----------
 transcript_ablation	| 1
