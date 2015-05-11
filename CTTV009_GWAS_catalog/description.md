@@ -32,8 +32,8 @@ over-write any previous assignment.
 In the end we obtain a file like this :
 gwas_snp_rs_id | assigned_ensembl_gene_id | sequence_ontology_term | overlapping_ensembl_gene_ids
 -------------- | ------------------------ | ---------------------- | ----------------------------
-rs227724 | ENSG00000183691|upstream_gene_variant|
-rs2488389|ENSG00000213047|intron_variant|
+rs227724 | ENSG00000183691|upstream_gene_variant|_
+rs2488389|ENSG00000213047|intron_variant|_
 rs7200543|ENSG00000275498|synonymous_variant | ENSG00000179889
 
 To obtain a score we associate the returned SO term with a number between 0 and 1 which reflect the severity of the effect
@@ -43,7 +43,7 @@ If the snp is in a coding region of a gene and brings a new stop codon it is lik
 If the gene is associated to a snp because it was the nearest gene to this snp, the association can still be right but we're less
 sure of it then in the previous example.
 
-Here are the different term and the score we associate to them :  
+Here are the different term and the score we associate to them :
 Term | Probability
 ---- | -----------
 transcript_ablation	| 1
@@ -81,6 +81,6 @@ feature_elongation | 0.114285714
 feature_truncation | 0.085714286
 intergenic_variant | 0.057142857
 nearest_gene_five_prime_end | 0.028571429
-
+  
 #Overall association_score method for an association
 The overall score is the product of the variant2gene score by the variant2disease score.
