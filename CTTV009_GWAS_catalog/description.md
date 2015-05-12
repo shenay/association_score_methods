@@ -1,5 +1,5 @@
 #Evidence.variant2disease.association_score
-The P value we get from the curated scientific publication for the given variant to disease association.
+This score is the P value we get from the curated scientific publication for the given variant to disease association.
 A P- value is a value representing the significance of the odds ratio (odds of disease for individuals having a specific
 allele and the odds of disease for individuals who do not have that same allele) is typically calculated using a simple
 chi-squared test. Finding odds ratios that are significantly different from 1 is the objective of the GWA study because
@@ -8,10 +8,13 @@ this shows that a SNP is associated with the disease.
 #Evidence.variant2gene.association_score
 
 To assign variants to genes we use a pipeline built by Michael Maguire(mmaguire@ebi.ac.uk).
+
 For each of the variant RS ids the pipeline will get :
-* the REST API JSON output
-* the nearest gene output from the Ensembl Perl API
-* the online VEP output.
+* the [REST API JSON output](http://rest.ensembl.org/documentation/info/vep_id_post)
+* the nearest gene output from the Ensembl Perl API (the get_nearest_Gene() method from the Bio::EnsEMBL::Variation::VariationFeature
+package in the [Ensembl Variation api](http://www.ensembl.org/info/docs/api/variation/index.html#api)).
+* the online [VEP](http://www.ensembl.org/info/docs/tools/vep/index.html) output .
+
 Those outputs are loaded into a database.
 
 For non intergenic genes :
@@ -22,14 +25,15 @@ If the variant SO term indicates it is non-synonymous ("missense_variant") for o
 it is assigned to those genes no more checks are run.
 Then, if the variant SO term indicates it is intronic for one or more genes, it is assigned to those genes.
 
-For intergenic genes, the pipeline uses the Perl API nearest gene method and the variant is assigned to the nearest gene at the 5'
+For intergenic genes:
+The pipeline uses the Perl API nearest gene method and the variant is assigned to the nearest gene at the 5'
 end. As there is no SO term to describe that the pipeline uses the following term nearest_gene_five_prime_end (http://targetvalidation.org/sequence/nearest_gene_five_prime_end).
 
 Finally, the REST VEP API does not report regulatory SNPs (or didn't when the platform was implemented). This information
-is obtained from the on-line VEP tool. If a SNP is flagged as regulatory, I assign it as such using the SO term and
+is obtained from the on-line VEP tool. If a SNP is flagged as regulatory, the pipeline assign it as such using the relvant SO term and
 over-write any previous assignment.
 
-In the end we obtain a file like this :  
+In the end we obtain a file like containing the information below :
 
 | gwas_snp_rs_id | assigned_ensembl_gene_id | sequence_ontology_term | overlapping_ensembl_gene_ids |
 | -------------- | ------------------------ | ---------------------- | ----------------------------
@@ -37,14 +41,14 @@ In the end we obtain a file like this :
 | rs2488389|ENSG00000213047|intron_variant|_ |
 | rs7200543|ENSG00000275498|synonymous_variant | ENSG00000179889 |
 
-To obtain a score we associate the returned SO term with a number between 0 and 1 which reflect the severity of the effect
+To obtain a score we associate the returned SO terms with a number between 0 and 1 which reflect the severity of the effect
 of the snp on the given gene (the closer to 1 and most severe). It also reflects in some degree the likeliness of that snp
 to be associated with that gene.
 If the snp is in a coding region of a gene and brings a new stop codon it is likely that the snp to gene assignment is right.
 If the gene is associated to a snp because it was the nearest gene to this snp, the association can still be right but we're less
 sure of it then in the previous example.
 
-Here are the different term and the score we associate to them :
+Here are the different terms and the scores we associate to them :
 
 | Term | Probability |
 | ---- | ----------- |
