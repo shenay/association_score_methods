@@ -4,7 +4,7 @@ Each json record in this dataset contains a unique variant to trait assocation. 
 
 Calculated via:
 (total number of json records that share variant to trait association) / (total number of unique variants * total number of unique traits)
-= (1) / (TBC * TBC)
+= (1) / (TBC * 4659)
 = TBC
 
 #Evidence.variant2gene.association_score
@@ -95,7 +95,7 @@ This score is the adjusted binary log-likelihood value for the given gene to tra
 
 In each case, the total number of json records that share the same gene to trait association across this dataset was divided by the matrix of possible gene to trait associations:
 (total number of json records that share gene to triat association) / (total number of unique genes * total number of unique traits)
-(X) / (TBC * TBC)
+(X) / (TBC * 4659)
 
 The resulting values were adjusted to account for the confidence associated with each instance of each gene to trait association. 
 Each instance of each gene to trait association is attributed a confidence value of 0-4 (http://www.ncbi.nlm.nih.gov/clinvar/docs/review_guidelines/):
