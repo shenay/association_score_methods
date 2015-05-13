@@ -1,9 +1,11 @@
-#Evidence.variant2trait.association_score
+#Evidence.variant2disease.association_score
 
-Each json record in this dataset contains a unique variant to trait assocation. Thus the log-likelihood for all variant to trait associations is the same value: TBC
+THIS NEEDS CHANGING - some, a low number of variants are linked to >1 disease.
+
+Each json record in this dataset contains a unique variant to disease assocation. Thus the binary log-likelihood for all variant to disease associations is the same value: TBC
 
 Calculated via:
-(total number of json records that share variant to trait association) / (total number of unique variants * total number of unique traits)
+(total number of json records that share variant to disease association) / (total number of unique variants * total number of unique diseases)
 = (1) / (23624 * 1750)
 = TBC
 
